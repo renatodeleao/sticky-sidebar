@@ -308,7 +308,8 @@ var StickySidebar = function () {
     }, {
       key: 'isSidebarFitsViewport',
       value: function isSidebarFitsViewport() {
-        return this.dimensions.sidebarHeight < this.dimensions.viewportHeight;
+        var offset = this.scrollDirection === 'down' ? this.dimensions.lastBottomSpacing : this.dimensions.lastTopSpacing;
+        return this.dimensions.sidebarHeight + offset < this.dimensions.viewportHeight;
       }
 
       /**
@@ -588,8 +589,8 @@ var StickySidebar = function () {
     }, {
       key: 'destroy',
       value: function destroy() {
-        window.removeEventListener('resize', this, { caption: false });
-        window.removeEventListener('scroll', this, { caption: false });
+        window.removeEventListener('resize', this, { capture: false });
+        window.removeEventListener('scroll', this, { capture: false });
 
         this.sidebar.classList.remove(this.options.stickyClass);
         this.sidebar.style.minHeight = '';

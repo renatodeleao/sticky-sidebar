@@ -281,7 +281,8 @@ const StickySidebar = (() => {
        * @return {Boolean}
        */
       isSidebarFitsViewport(){
-        return this.dimensions.sidebarHeight < this.dimensions.viewportHeight;
+        let offset = this.scrollDirection === 'down' ? this.dimensions.lastBottomSpacing : this.dimensions.lastTopSpacing;
+        return this.dimensions.sidebarHeight + offset < this.dimensions.viewportHeight;
       }
   
       /**
